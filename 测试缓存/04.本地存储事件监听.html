@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+    console.log(localStorage.price);
+
+    window.addEventListener("storage",function(obj){
+        alert(obj.oldValue+","+obj.newValue+","+obj.url);
+    },true);
+
+   // 当setItem(),removeItem()或者clear() 方法被调用，并且数据真的发生了改变时，就会触发storage事件,如果需要进行监听数据处理，通过以下方法:
+//            window.addEventListener(event,handleEvent, capture)
+//    event:设置成storage
+//    handleEvent:事件处理函数
+//    capture:事件处理顺序，一般设置成false,表示采用冒泡方式处理
+//
+//    handleEvent处理事件的函数会接收到一个StorageEvent对象，该对象有以下属性:
+//            key:被修改的键。
+//    oldValue:修改前的值（如果是增加新的键值，则该属性为null）
+//    newValue:修改后的值（如果是删除键值，则该属性为null）
+//    url/uri:触发当前存储事件的页面的url
+</script>
+</body>
+</html>

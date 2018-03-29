@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        [data-birth-date]
+        {
+            background-color: #0f0;
+            width:100px;
+            margin:20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="test" data-age="24">
+        Click Here
+    </div>
+</body>
+<script src='http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js'></script>
+<script>
+    var test = document.getElementById('test');
+  var b=test.dataset.my = 'Byron';
+    console.log(test);
+    console.log(b);
+</script>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src='http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js'></script>
+</head>
+
+<style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .inSeach{
+            width: 300px;
+            height: 100px;
+            background-color: red;
+        }
+        li{
+            list-style: none;
+
+
+        }
+
+        .inSeach  .current {
+            background-color: yellow;
+            color: black;
+        }
+        .inSeach li {
+            width: 40px;
+            height: 22px;
+            line-height: 22px;
+            float: left;
+            text-align: center;
+            cursor: pointer;
+
+        }
+        /*.inSeach .shop {*/
+            /*width: 40px;*/
+            /*height: 22px;*/
+            /*line-height: 22px;*/
+            /*float: right;*/
+            /*text-align: center;*/
+            /*cursor: pointer;*/
+        /*}*/
+</style>
+<body>
+        <ul class="inSeach">
+            <li class="fabric current" ><a>面料</a></li>
+            <li class="shop1" ><a>商家</a></li>
+            <li class="shop2" ><a>商家</a></li>
+            <li class="shop3" ><a>商家</a></li>
+            <li class="shop4" ><a>商家</a></li>
+            <li class="shop5" ><a>商家</a></li>
+        </ul>
+</body>
+<script>
+            $('.inSeach>li').on("click",function(){
+                $(this).addClass('current').siblings('li').removeClass('current');
+            });
+
+//            $('.inSeach>li').on('click',function(){
+//                $(this).addClass('current').siblings('li').removeClass('current');
+//            })
+</script>
+</html>

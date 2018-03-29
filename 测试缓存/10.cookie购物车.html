@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title></title>
+    <script language="javascript">
+        function deletegoods(obj) {
+            var rowIndex = obj.parentNode.parentNode.rowIndex;
+            var table = document.getElementById("table");
+            table.deleteRow(rowIndex);
+        }
+    </script>
+</head>
+<body>
+
+<form name="form1" method="post" action="">
+    <table width="700" border="0" id="table">
+        <tr>
+            <td>ID/图片/商品名</td>
+            <td>SIZE</td>
+            <td>单价</td>
+            <td>数量</td>
+            <td> </td>
+        </tr>
+        <c:forEach items="${goodslist}" var="goods">
+            <tr id="${goods[0]}">
+                <td>${goods[0]}<img src="${goods[1]}" border="0"/></a><a target="_blank"
+                                                                         title="${goods[2]}" href="${goods[3]}">${goods[2]}</a></td>
+                <td>${goods[4]}</td>
+                <td>${goods[5]}</td>
+                <td>${goods[6]}</td>
+                <td><a href="#">收藏</a> <a href="#" onclick="deletegoods(this)">删除</a></td>
+            </tr>
+        </c:forEach>
+    </table>
+</form>
+<p> </p>
+<scrupt>
+    //设置cookie
+    ArrayList<String[]> list = new ArrayList<String[]>();
+    list.add(new String[]{"1001","img/1.jpg","经典基本款低帮帆布女鞋2.0 粉绿色","#","39","¥69.00","1"});
+    list.add(new String[]{"1002","img/2.jpg","基础罗纹Y字吊带背心 奶蓝色","#","m","¥9.00","1"});
+    int times = 1*24*60*60;
+    for(int i=1;i<=list.size();i++){
+    String[] strings = new String[list.get(i-1).length];
+    for(int j=0;j<list.get(i-1).length;j++){
+    strings[j]=java.net.URLEncoder.encode(list.get(i-1)[j],"UTF-8");
+    }
+    Cookie cookie = new Cookie("item_id_"+i,strings[0]);
+    cookie.setMaxAge(times);
+    response.addCookie(cookie);
+    cookie = new Cookie("item_img_"+i,strings[1]);
+    cookie.setMaxAge(times);
+    response.addCookie(cookie);
+    cookie = new Cookie("item_title_"+i,strings[2]);
+    cookie.setMaxAge(times);
+    response.addCookie(cookie);
+    cookie = new Cookie("item_URL_"+i,strings[3]);
+    cookie.setMaxAge(times);
+    response.addCookie(cookie);
+    cookie = new Cookie("item_size_"+i,strings[4]);
+    cookie.setMaxAge(times);
+    response.addCookie(cookie);
+    cookie = new Cookie("item_price_"+i,strings[5]);
+    cookie.setMaxAge(times);
+    response.addCookie(cookie);
+    cookie = new Cookie("item_number_"+i,strings[6]);
+    cookie.setMaxAge(times);
+    response.addCookie(cookie);
+    }
+
+
+    //获取cookie
+    Cookie[] cookies = request.getCookies();
+    if(cookies!=null && cookies.length>0) {
+    for(int i=0; i<cookies.length;i++) {
+    out.print(cookies[i].getName() +"————"+ java.net.URLDecoder.decode(cookies[i].getValue(),"UTF-8") + "<br/>");
+    }
+    }
+    if(cookies!=null && cookies.length>5){
+    ArrayList<String[]> goodslist = new ArrayList<String[]>();
+    int i=1;
+    for(int j=0;j<cookies.length/7;j++){
+    String[] strings = new String[7];
+    for(int k=0;k<strings.length;k++){
+    strings[k]=java.net.URLDecoder.decode(cookies[i++].getValue(),"UTF-8");
+    }
+    goodslist.add(strings);
+    }
+    pageContext.setAttribute("goodslist", goodslist);
+    }
+
+ pageContext.setAttribute("length", cookies.length);
+    %>
+
+</scrupt>
+</body>
+</html>

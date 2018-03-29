@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+<script>
+    //转换样式
+
+    this.dockedItems = [{
+        xtype:'toolbar',
+        dock:'top',
+        style:{background: '#2D2D2E'},
+        items:['->',{
+            xtype: "combobox",
+            name: "porstyle",
+
+            id:'porstyle',
+            fieldLabel: '<span style="color: white">选择风格:</span>',
+            store: genderStore,
+            editable: false,
+            displayField: "Name",
+            valueField: "Value",
+
+            emptyText: "默认主题",
+            queryMode: "local",
+            listeners : {
+                select : function(combo,record,index) {
+                    console.log(record[0].index)
+                    if
+                    (record[0].index==0){
+                        var admChartScr = 'templates/standard/adm-chart/age-part-distributed-chart.html?hospitalId=' + admChart.hospitalId + '&deptId=' + admChart.deptId + '&beginDate=' + admChart.beginDate +
+                                '&endDate=' + admChart.endDate + '&recType=' + admChart.recType + '&recTypeName=' + admChart.recTypeName + '&style=1';
+                        var diseaseSrc = 'templates/standard/adm-chart/disease-spectrum-distributed-chart.html?
+                        hospitalId=' + disease.hospitalId + '&deptId=' + disease.deptId + '&inDeptId='+disease.inDeptId+'&beginDate=' + disease.beginDate + '&endDate=' + disease.endDate + '&recType=' + disease.recType + '&recTypeName=' + disease.recTypeName +
+                        '&style=1';
+                        var stayTimeSrc = 'templates/standard/adm-chart/stay-time-chart.html?hospitalId=' + stayTime.hospitalId + '&deptId=' + stayTime.deptId + '&beginDate=' + stayTime.beginDate + '&endDate=' +
+                                stayTime.endDate + '&recType=' + stayTime.recType + '&recTypeName=' + stayTime.recTypeName + '&style=1';
+                        var emerTimeSrc = 'templates/standard/adm-chart/emer-time-distributed-chart.html?hospitalId=' +
+                                emerTime.hospitalId + '&deptId=' + emerTime.deptId + '&beginDate=' + emerTime.beginDate + '&endDate=' + emerTime.endDate + '&recType=TRI&recTypeName=' + emerTime.recTypeName +
+
+
+//放大 缩小
+
+//写一个 大图标 然后 判读 如果是的话 就放大 其他盒子隐藏 这个盒子占满全屏幕
+
+                                getTools: function() {
+                            var height = ""; //最大化组件原始高度
+                            var portletItem = "",
+                                    allColumnWidth = '';
+                            return [{
+                                xtype: 'tool',
+                                type: 'maximize',
+                                handler: function(e,
+                                                  target, panelHeader, tool) {
+                                    var portlet = panelHeader.ownerCt;
+
+                                    var container = Ext.getCmp('app-portal'); //获取首页portal组件对象
+                                    //遍历首页portal组件，设置最大化组件充满整个首页，并隐藏其他
+                                    组件
+                                    container.items.each(function(pitem, index, length) {
+                                        allColumnWidth += pitem.columnWidth + ",";
+                                        if (pitem.columnWidth < 1) { //非最大化状态，实现最大化
+
+                                            tool.setType('restore');
+                                            pitem.columnWidth = 1;
+                                            pitem.items.each(function(item, index, length) {
+                                                if (item.id == portlet.id) {
+
+                                                    portletItem = pitem;
+                                                    height = item.height;
+                                                    item.setHeight(container.body.dom.offsetHeight - 10);
+                                                } else {
+                                                    item.hide
+                                                    ();
+                                                }
+                                            });
+
+                                            if (pitem != portletItem) {
+                                                pitem.hide();
+                                            }
+                                        } else { //最大化状态，还原原始大小
+
+                                            tool.setType('maximize');
+                                            pitem.show();
+                                            var arrayWidth = allColumnWidth.split(",");
+                                            pitem.columnWidth = arrayWidth[index];
+
+
+                                            pitem.items.each(function(item, index, length) {
+                                                if (item.id == portlet.id) {
+                                                    item.setHeight(Ext.getCmp('app-portal').el.dom.offsetHeight = 350);
+                                                } else
+                                                {
+                                                    item.setHeight(Ext.getCmp('app-portal').el.dom.offsetHeight = 350);
+                                                    item.show();
+                                                }
+
+</script>
+</html>

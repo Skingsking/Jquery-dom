@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+        <form id='addForm' action='UserAdd.action' type='post'>
+            <label for='uname'>用户名</label>：<input type='text' name='uname' id='uname'><br>
+            <label for='mobileIpt'>手机号：</label><input type='text' name='mobileIpt' id='mobileIpt'><br>
+            <label for='birthday'>生日：</label><input type='text' name='birthday'><br>
+            <input type='button' value='提交' onclick='addUser()'>
+        </form>
+</body>
+        <script src='http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js'></script>
+        <script>
+            //绑定点击事件 点击提交 显示属性
+                function addUser(){
+                    var user={
+                        unam:$('#uname').val(),
+                        mobileIpt:$('#mobileIpt').val(),
+                        birthday:$('#birthday').val()
+                    };
+                    console.log(user);
+
+                    $.ajax({
+                        url:'UserAdd.action',  // 指向我们的 action
+                        data:user,
+                        type:'post',
+                        dataType:'text',
+                        success:function(msg){
+                            if(msg=='1'){
+                                console.log('添加成功');
+                        }else{
+                                console.log('添加失败');
+                            }
+                        }
+                    })
+                }
+        </script>
+</html>

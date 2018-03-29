@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="jquery-1.11.1.js"></script>
+    <script>
+        $(function () {
+            //获取ul中的li设置为粉色
+            //后代，儿孙重孙曾孙玄孙....
+
+            // 这个是获取的全部 只要是ul 下面的li 都要设置
+            var jqli = $("ul li");
+
+            //直接引用给他样式 css就好
+
+            jqli.css("margin",5);
+            jqli.css("background","pink");
+
+            //子代，亲儿子
+            //这个 是只是获取ul下面的li ol 隔开之后就不是了
+            var jqotherLi = $("ul>li");
+            jqotherLi.css("background","red");
+        });
+    </script>
+</head>
+<body>
+<ul>
+    <li>111</li>
+    <li>222</li>
+    <li>333</li>
+    <ol>
+        <li>aaa</li>
+        <li>bbb</li>
+        <li>ccc</li>
+    </ol>
+</ul>
+</body>
+</html>

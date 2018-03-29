@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Web SQL Database</h2>
+<div>
+    <button onclick="createTable()">创建表</button>
+</div>
+<h2 id="msg"></h2>
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    //创建或打开名称为products，版本为1.0,描述为产品数据库，3M大小的数据库
+    var db = openDatabase("products", 1.0, "产品数据库", 1024 * 1024 * 3, function() {
+        log("创建数据库完成");
+    });
+
+    //创建表
+    function createTable() {
+        db.transaction(function(tx) {
+            tx.executeSql(
+                    "create table if not exists goods(id integer primary key autoincrement,name text not null,price double)", [],
+                    function(tx, result) {
+                        log('创建表成功');
+                    },
+                    function(tx, error) {
+                        log('创建表失败' + error.message);
+                    });
+        });
+    }
+
+    //显示消息
+    function log(info) {
+        $("#msg")[0].innerHTML += info + "<br/>";
+    }
+</script>
+</body>
+</html>

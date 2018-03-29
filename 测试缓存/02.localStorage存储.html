@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+            <h2>localStorage 本地存储</h2>
+            <button onclick="add_click()">添加</button>
+            <script type="text/javascript">
+                function    add_click()
+                {
+                    //向本地存储中添加一个名为name,值为"手机"的key-value对象
+                    localStorage.setItem("name","手机");
+                    //办法2
+                    localStorage["price"]=999.5;
+                    //办法3
+                    localStorage.amount=1788;
+                }
+</script>
+</body>
+</html>

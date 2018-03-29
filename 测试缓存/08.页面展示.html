@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Web SQL Database</h2>
+<div>
+    <button onclick="createTable()">创建表</button>
+    <table border="1" width="80%" id="tabGoods">
+        <tr><th>编号</th><th>名称</th><th>价格</th><th>删除</th></tr>
+    </table>
+    <fieldset>
+        <legend>商品信息</legend>
+        <p>
+            <label for="name">名称：</label>
+            <input type="text" id="name" value="" />
+        </p>
+        <p>
+            <label for="price">价格：</label>
+            <input type="text" id="price" value="" />
+        </p>
+        <p>
+            <button onclick="insert()">添加</button>
+        </p>
+    </fieldset>
+</div>
+<h2 id="msg"></h2>
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+    //创建名称为products，版本为1.0,描述为产品数据库，3M大小的数据库
+    var db = openDatabase("products", 1.0, "产品数据库", 1024 * 1024 * 3, function() {
+        log("创建或打开数据库完成");
+    });
+
+    //展示，加载数据
+    function select()
+    {
+        //将表格中tr索引大于0的元素删除
+        $("#tabGoods tr:gt(0)").remove();
+        db.transaction(function(tx) {
+            tx.executeSql(
+                    "select id,name,price from goods", [],
+                    function(tx, result) {
+
+                        for (var i=0;i<result.rows.length;i++) {
+                            var tr=$("<tr/>");
+
+                            $("<td/>").text(result.rows.item(i)["id"]).appendTo(tr);
+                            $("<td/>").text(result.rows.item(i)["name"]).appendTo(tr);
+                            $("<td/>").text(result.rows.item(i)["price"]).appendTo(tr);
+                            var del=$("<a href='#' onclick='del("+result.rows.item(i)["id"]+")' >删除</a>")
+                            $("<td/>").append(del).appendTo(tr);
+
+                            tr.appendTo("#tabGoods");
+                        }
+
+                    },
+                    function(tx, error) {
+                        log('创建表失败' + error.message);
+                    });
+        });
+    }
+    select();
+
+    //创建表
+    function createTable() {
+        db.transaction(function(tx) {
+            tx.executeSql(
+                    "create table if not exists goods(id integer primary key autoincrement,name text not null,price double)", [],
+                    function(tx, result) {
+                        log('创建表成功');
+                    },
+                    function(tx, error) {
+                        log('创建表失败' + error.message);
+                    });
+        });
+    }
+
+    //插入数据
+    function insert() {
+        db.transaction(function(tx) {
+            tx.executeSql(
+                    "insert into goods(name,price) values(?,?)",
+                    [$("#name").val(),$("#price").val()],
+                    function(tx, result) {
+                        log('添加数据成功');
+                        select();
+                    },
+                    function(tx, error) {
+                        log('添加数据失败' + error.message);
+                    });
+        });
+    }
+
+
+
+    //显示消息
+    function log(info) {
+        $("#msg")[0].innerHTML += info + "<br/>";
+    }
+</script>
+</body>
+</html>
